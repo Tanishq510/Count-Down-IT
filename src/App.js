@@ -15,43 +15,66 @@ export default function App() {
     setState({ ...state, diff, fomateToDate });
     setDate({ ...months });
   };
+  const fetchQuote = () => {
+    const api = 'https://api.quotable.io/random';
+    let res = fetch(api).then((res) => {
+      console.log(res);
+    });
+  };
+  useEffect(() => {
+    fetchQuote;
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => initiateContDown(), 1000);
     return () => clearTimeout(timer);
   });
   return (
-    <div className="">
-      <div className="rounded bg-gradient-4 text-white shadow p-5 text-center mb-5">
-        <p className="mb-0 font-weight-bold text-uppercase">
-          CountDown To last day
-        </p>
-        {Object.keys(date).length ? (
-          <>
-            <div id="clock-c" className="countdown py-4">
-              <div className="holder m-2">
-                <span className="h1 font-weight-bold">{date.months}</span> Month
-              </div>
-              <div className="holder m-2">
-                <span className="h1 font-weight-bold">{date.days}</span> Days
-              </div>
-              <div className="holder m-2">
-                <span className="h1 font-weight-bold">{date.hours}</span> Hours
-              </div>
-              <div className="holder m-2">
-                <span className="h1 font-weight-bold">{date.minutes}</span>{' '}
-                Minutes
-              </div>
-              <div className="holder m-2">
-                <span className="h1 font-weight-bold">{date.seconds}</span>{' '}
-                Seconds
+    <div className="container mt-5 mb-3">
+      <div className="row justify-content-center">
+        <div className="col-md-4 mt-4">
+          <div className="card p-3 mb-2">
+            <div className="d-flex justify-content-between">
+              <div className="d-flex flex-row align-items-center justify-content-center">
+                <div className="icon"></div>
+                <div className="ms-2 c-details">
+                  <h6 className="mb-0">Infosys</h6>{' '}
+                  <span className="text-primary">{state?.diff}</span>
+                  <span>{state?.diff > 1 ? ' days' : 'day'} to go</span>
+                </div>
               </div>
             </div>
-            <div>Expected Date : {state?.fomateToDate}</div>
-            <div>Days : {state?.diff}</div>
-          </>
-        ) : (
-          <div className="spinner-border text-light" role="status"></div>
-        )}
+            <div className="mt-5">
+              <h3 className="heading">
+                {date?.months} <small>Months </small>
+                {/* <br /> */}
+                {date?.days} <small>Days </small>
+                {/* <br /> */}
+                {date?.hours} <small>Hours </small>
+                {/* <br /> */}
+                {date?.minutes} <small>Minutes </small>
+                {/* <br /> */}
+                {date?.seconds} <small>Seconds </small>
+                {/* <br /> */}
+              </h3>
+              <div className="mt-5">
+                <div className="progress">
+                  <div
+                    className="progress-bar"
+                    role="progressbar"
+                    style={{ width: '50%' }}
+                  />
+                </div>
+                <div className="mt-3">
+                  {' '}
+                  <span className="text1">
+                    <b>Expected Date</b>
+                    <i className="text-primary"> {state?.fomateToDate}</i>
+                  </span>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
