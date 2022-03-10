@@ -5,6 +5,7 @@ require('moment-precise-range-plugin');
 export default function App() {
   const [date, setDate] = React.useState({});
   const [state, setState] = React.useState({});
+  // const [quote, setQuote] = React.useState({});
   const initiateContDown = () => {
     let currentDate = moment();
     let vd = moment('14-02-2022', 'DD-MM-YYYY');
@@ -16,13 +17,19 @@ export default function App() {
     setDate({ ...months });
   };
   const fetchQuote = () => {
-    const api = 'https://api.quotable.io/random';
-    let res = fetch(api).then((res) => {
-      console.log(res);
-    });
+    fetch('https://type.fit/api/quotes')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        let random = Math.floor(Math.random() * data.length);
+        let quote = data[random];
+        console.log(quote);
+        // setQuote(quote);
+      });
   };
   useEffect(() => {
-    fetchQuote;
+    fetchQuote();
   }, []);
   useEffect(() => {
     const timer = setTimeout(() => initiateContDown(), 1000);
@@ -71,6 +78,7 @@ export default function App() {
                     <i className="text-primary"> {state?.fomateToDate}</i>
                   </span>{' '}
                 </div>
+                {/* <div className="mt-3">{quote.text}</div> */}
               </div>
             </div>
           </div>
