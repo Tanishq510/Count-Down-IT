@@ -28,6 +28,10 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 39px;
+  background-image: url('https://www.infosys.com/content/dam/infosys-web/en/global-resource/icons/favicon.ico');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .badge span {
