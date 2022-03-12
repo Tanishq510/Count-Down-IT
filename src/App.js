@@ -3,9 +3,10 @@ import './style.css';
 import moment from 'moment';
 require('moment-precise-range-plugin');
 export default function App() {
+  const totalDays = 90;
   const [date, setDate] = React.useState({});
   const [state, setState] = React.useState({});
-  // const [quote, setQuote] = React.useState({});
+  const [quote, setQuote] = React.useState({});
   const initiateContDown = () => {
     let currentDate = moment();
     let vd = moment('14-02-2022', 'DD-MM-YYYY');
@@ -13,7 +14,8 @@ export default function App() {
     let fomateToDate = toDate.format('DD-MMM-YYYY');
     let months = moment.preciseDiff(vd, currentDate, true);
     let diff = toDate.diff(currentDate, 'days');
-    setState({ ...state, diff, fomateToDate });
+    let percentage = (totalDays - diff) % totalDays;
+    setState({ ...state, diff, fomateToDate, percentage });
     setDate({ ...months });
   };
   const fetchQuote = () => {
@@ -24,8 +26,7 @@ export default function App() {
       .then(function (data) {
         let random = Math.floor(Math.random() * data.length);
         let quote = data[random];
-        console.log(quote);
-        // setQuote(quote);
+        setQuote(quote);
       });
   };
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function App() {
     return () => clearTimeout(timer);
   });
   return (
-    <div className="container mt-5 mb-3">
+    <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-4 mt-4">
           <div className="card p-3 mb-2">
@@ -66,9 +67,9 @@ export default function App() {
               <div className="mt-5">
                 <div className="progress">
                   <div
-                    className="progress-bar"
+                    className="progress-bar text-primary"
                     role="progressbar"
-                    style={{ width: '50%' }}
+                    style={{ width: state.percentage }}
                   />
                 </div>
                 <div className="mt-3">
@@ -78,7 +79,11 @@ export default function App() {
                     <i className="text-primary"> {state?.fomateToDate}</i>
                   </span>{' '}
                 </div>
-                {/* <div className="mt-3">{quote.text}</div> */}
+
+                <figure class="quote">
+                  <blockquote>{quote.text}</blockquote>
+                  <figcaption>&mdash; {quote.author}</figcaption>
+                </figure>
               </div>
             </div>
           </div>
