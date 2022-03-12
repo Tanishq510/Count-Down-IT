@@ -39,55 +39,64 @@ export default function App() {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-4 mt-4">
-          <div className="card p-3 mb-2">
-            <div className="d-flex justify-content-between">
-              <div className="d-flex flex-row align-items-center justify-content-center">
-                <div className="icon"></div>
-                <div className="ms-2 c-details">
-                  <h6 className="mb-0">Infosys</h6>{' '}
-                  <span className="text-primary">{state?.diff}</span>
-                  <span>{state?.diff > 1 ? ' days' : 'day'} to go</span>
+        {Object.keys(state).length ? (
+          <div className="col-md-4 mt-4">
+            <div className="card p-3 mb-2">
+              <div className="d-flex justify-content-between">
+                <div className="d-flex flex-row align-items-center justify-content-center">
+                  <div className="icon"></div>
+                  <div className="ms-2 c-details">
+                    <h6 className="mb-0">Infosys</h6>{' '}
+                    <span className="text-primary">{state?.diff}</span>
+                    <span>{state?.diff > 1 ? ' days' : 'day'} to go</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mt-5">
-              <h3 className="heading">
-                {date?.months} <small>Months </small>
-                {/* <br /> */}
-                {date?.days} <small>Days </small>
-                {/* <br /> */}
-                {date?.hours} <small>Hours </small>
-                {/* <br /> */}
-                {date?.minutes} <small>Minutes </small>
-                {/* <br /> */}
-                {date?.seconds} <small>Seconds </small>
-                {/* <br /> */}
-              </h3>
               <div className="mt-5">
-                <div className="progress">
-                  <div
-                    className="progress-bar text-primary"
-                    role="progressbar"
-                    style={{ width: state.percentage }}
-                  />
-                </div>
+                <h3 className="heading">
+                  {date?.months} <small>Months </small>
+                  {/* <br /> */}
+                  {date?.days} <small>Days </small>
+                  {/* <br /> */}
+                  {date?.hours} <small>Hours </small>
+                  {/* <br /> */}
+                  {date?.minutes} <small>Minutes </small>
+                  {/* <br /> */}
+                  {date?.seconds} <small>Seconds </small>
+                  {/* <br /> */}
+                </h3>
                 <div className="mt-3">
-                  {' '}
                   <span className="text1">
                     <b>Expected Date</b>
                     <i className="text-primary"> {state?.fomateToDate}</i>
-                  </span>{' '}
+                  </span>
                 </div>
-
-                <figure class="quote">
-                  <blockquote>{quote.text}</blockquote>
-                  <figcaption>&mdash; {quote.author}</figcaption>
+                <div className="mt-3">
+                  <div className="progress">
+                    <div
+                      className="progress-bar text-primary"
+                      role="progressbar"
+                      style={{ width: state.percentage }}
+                    />
+                  </div>
+                </div>
+                <figure className="quote mt-3">
+                  <blockquote>
+                    <b>{quote.text}</b>
+                  </blockquote>
+                  <figcaption>
+                    &mdash;<i>{quote.author}</i>
+                  </figcaption>
                 </figure>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div
+            className="spinner-border text-primary text-center"
+            role="status"
+          ></div>
+        )}
       </div>
     </div>
   );
