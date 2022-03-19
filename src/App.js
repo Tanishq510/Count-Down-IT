@@ -76,7 +76,7 @@ export default function App() {
                     <div
                       className="progress-bar text-primary"
                       role="progressbar"
-                      style={{ width: state.percentage }}
+                      style={{ width: `${state.percentage}%` }}
                     />
                   </div>
                 </div>
